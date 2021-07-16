@@ -2,32 +2,34 @@
 Captone Project for Udacity Data Science Nanodegree 
 
 ## **Table of Contents**
-1. Installation
+1. Installation 
 2. Project Motivation
-3. File Description
-4. Results
-5. Licensing, Authors, Acknowledgements
+3. Project Definition
+4. File Description
+5. Results Analysis
+6. Conclusion
+7. Licensing, Authors, Acknowledgements
 
 ## **Installation**
-There is no external library required to run the code. The code should run under Python 3
+To run the scripts/notebooks of this project, you'll need the following python libraries installed.
+* **streamlit, yfinance, pandas, numpy, matplotlib, tensorflow, sklearn, datetime**
 
 ## **Project Motivation**
+Quantitative methods and financial models have been widely studied and used to better understand market behavior and make profitable investments and trades. With the development of technology and Internet, it is easy and fast to access historical stock prices and company performance data, which is suitable for machine learning algorithms to process.
 
-The COVID19 turned into a global pandemic and hit lots of countries on the planet. I was interested the situation in the US in 2020 based on a dataset from CDC.
-Particularly I wanted to explore the following topics:
+What if we have a stock predictor that utilize historical data of a company, process the data and create a model to learn its market behavior and make prediction for the future? Is the prediction of the price going to be accurate enough to give us the correct trading guide? If so, that stock predictor could worth a lot and bring you wealth.
+In the project, I want to apply what I've learned from this program to build such a stock predictor. A few different models and approaches will be implemented and compared to get the better results. 
 
-1. What is the time-series trend of confirmed cases and death in the US?
-2. What social events might contribute to the change of the trend?
-3. Where will the trend move toward in 2021?
-4. What are the regional differences and how the neighbor states situation affect mine? 
 
-By answering the questions above, I should have a good understanding of how the Covid developed in the US and some factors that might contribute to the trend.
-At the end, I am also curious about seeing how the situation will turn in 2021. 
+## **Project Definition**
+
 
 ## **File Description**
-There are 3 notebooks available to showcase work related to the above questions. Each notebook has its title related to the questions above. And each notebook starts with data gathering, visualization, modeling and evaluation. Some markdown cells also assists to understand the working process.
+There are 2 notebooks and 3 python scripts available to showcase work related to the above questions. 'Stock_predictor' is the notebook that does all the studies on the different models. It starts with web scraping, data wrangling, visualization, modeling and evaluation. Some markdown cells assists to understand the working process.
 
-There is an additional helper.py file that contains some useful functions in preparing data and plots.
+Then, I translated all the work in the above notebook to two python scripts 'helper.py' and 'regression_model.py'. 'helper.py' helps scape data from Yahoo finance API and preprocess data. 'regression_model.py' contains all the model creation, training, evaluation and printing the metrics and the outcome. 'User_interface' is a notebook that's user-friendly to check the predicted stock price for your choice. 
+
+Finally, 'stock_app.py' is the python script to enable the web app and showing resutls.
 
 ## **Results**
 The main results and analysis can be found at this [post](https://micluan41.medium.com/how-does-the-covid-progress-in-the-us-a75d18f477de)
