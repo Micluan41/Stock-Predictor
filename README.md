@@ -40,7 +40,7 @@ Finally, 'stock_app.py' is the python script to enable the web app and showing r
 
 ## **Analysis and Results**
 
-### **Data**
+### * **Data**
 
 
 
