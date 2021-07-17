@@ -6,9 +6,10 @@ Captone Project for Udacity Data Science Nanodegree
 2. Project Motivation
 3. Project Definition
 4. File Description
-5. Results Analysis
-6. Conclusion
-7. Licensing, Authors, Acknowledgements
+5. Analysis
+6. Results 
+7. Conclusion
+8. Licensing, Authors, Acknowledgements
 
 ## **Installation**
 To run the scripts/notebooks of this project, you'll need the following python libraries installed.
@@ -23,15 +24,22 @@ In the project, I want to apply what I've learned from this program to build suc
 ## **Project Definition**
 Develop a stock predictor that predict any company's future stock given its historical stock price. Build an web application that shows the stock history, future price, trading direction according to user selected company stock ticker and model names. 
 
+Some solutions including regression (linear, polynomial) models are provided as well as deep learning model (LSTM). Compare all these models and find the best fit (the least mean squred error).
+
 ## **File Description**
+To run the notebook or the web application, you have to first install the necessary python libraries in requirements.txt
+
 There are 2 notebooks and 3 python scripts available to showcase work related to the above questions. 'Stock_predictor' is the notebook that does all the studies on the different models. It starts with web scraping, data wrangling, visualization, modeling and evaluation. Some markdown cells assists to understand the working process.
 
 Then, I translated all the work in the above notebook to two python scripts 'helper.py' and 'regression_model.py'. 'helper.py' helps scape data from Yahoo finance API and preprocess data. 'regression_model.py' contains all the model creation, training, evaluation and printing the metrics and the outcome. 'User_interface' is a notebook that's user-friendly to check the predicted stock price for your choice. 
 
 Finally, 'stock_app.py' is the python script to enable the web app and showing resutls.
 
+## **Analysis**
+
+
 ## **Results**
-The main results and analysis can be found at this [post](https://micluan41.medium.com/how-does-the-covid-progress-in-the-us-a75d18f477de)
+
 
 ## **Licensing, Authors, Acknowledgements**
 Dataset source: [Yahoo Finance API](https://finance.yahoo.com/)
