@@ -31,9 +31,11 @@ To run the notebook or the web application, you have to first install the necess
 
 There are 2 notebooks and 3 python scripts available to showcase work related to the above questions. 'Stock_predictor' is the notebook that does all the studies on the different models. It starts with web scraping, data wrangling, visualization, modeling and evaluation. Some markdown cells assists to understand the working process.
 
-Then, I translated all the work in the above notebook to two python scripts 'helper.py' and 'regression_model.py'. 'helper.py' helps scape data from Yahoo finance API and preprocess data. 'regression_model.py' contains all the model creation, training, evaluation and printing the metrics and the outcome. 'User_interface' is a notebook that's user-friendly to check the predicted stock price for your choice. 
+Then, I translated all the work in the above notebook to two python scripts 'helper.py' and 'regression_model.py'/'regression_model_old.py'. 'helper.py' helps scape data from Yahoo finance API and preprocess data. 'regression_model.py' contains all the model creation, training, evaluation and printing the metrics and the outcome. 
 
-Finally, 'stock_app.py' is the python script to enable the web app and showing resutls.
+'User_interface' is a notebook that's user-friendly to check the predicted stock price for your choice. The other purpopse of this notebook is to see how some parameters affect the final outcome of the models. It's easier to get the results here instead of the web app. This notebook uses functions in 'regression_model_old.py'.
+
+Finally, 'stock_app.py' is the python script to enable the web app and showing resutls. Different from the 'User_interface', it uses function of 'regression_model.py'.
 
 ## **Running Instruction**
 
