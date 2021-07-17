@@ -20,9 +20,8 @@ Quantitative methods and financial models have been widely studied and used to b
 What if we have a stock predictor that utilize historical data of a company, process the data and create a model to learn its market behavior and make prediction for the future? Is the prediction of the price going to be accurate enough to give us the correct trading guide? If so, that stock predictor could worth a lot and bring you wealth.
 In the project, I want to apply what I've learned from this program to build such a stock predictor. A few different models and approaches will be implemented and compared to get the better results. 
 
-
 ## **Project Definition**
-
+Develop a stock predictor that predict any company's future stock given its historical stock price. Build an web application that shows the stock history, future price, trading direction according to user selected company stock ticker and model names. 
 
 ## **File Description**
 There are 2 notebooks and 3 python scripts available to showcase work related to the above questions. 'Stock_predictor' is the notebook that does all the studies on the different models. It starts with web scraping, data wrangling, visualization, modeling and evaluation. Some markdown cells assists to understand the working process.
@@ -35,5 +34,5 @@ Finally, 'stock_app.py' is the python script to enable the web app and showing r
 The main results and analysis can be found at this [post](https://micluan41.medium.com/how-does-the-covid-progress-in-the-us-a75d18f477de)
 
 ## **Licensing, Authors, Acknowledgements**
-Dataset source: Data.CDC.gov
-Find the dataset [here](https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36)
+Dataset source: [Yahoo Finance API](https://finance.yahoo.com/)
+Udacity MLND Capstone Project Description - Investment and Trading [docs](MLND Capstone Project Description - Investment and Trading)
