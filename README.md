@@ -58,8 +58,13 @@ The models will be trained by feeding the training dataset into them, which are 
 ### -**Results**
 For the case study, I run experiments on APPLE stock. The stock has a big jump in 2020 and recently it bounces back and forth while remain an increasing trend. The linear regression and SVM has similar MSE and R2_score, while DecisionTree overfit the training data and got larger MSE and smaller R2_score for the test data. After a GridSearch, the MSE reduces to slightly larger than the other two models. The LSTM model used more data and ended up overfiting the training data and has large MSE compare to the other regression models. Overall, LSTM prediction is smoother and might be used to study the long time trend of the stock change.
 
-## **Conclusion**
+### -**Future Improvement**
+The model can be improved to generate better useful trading advice. Although it's hard to predict price right, it's easier to predict if the stock price will increase or decrease and convert it into a classification problem. In that way, we can get wrong price but correct direction which is giving the trading direction. Another way to improve the model is by feature engineering the input. For instance, we can use a moving average of the previous 7 days price instead of only the previous day as input. We could also consider some variables like returns and categorical variables like if the company pays dividend etc.
 
+## **Conclusion**
+The idea of this project is to use machine learning model to learn the historical progression of a company's stock price and predict it for the next day and so on. A few models are built and compared together. Since different stocks have their own pattern, there is no one best model to fit all. In general, linear regression and SVM have similar performance and smaller MSE. Decisiontree is not stable and can overfit. The LSTM model uses more historical data and also has overfitting problem, but it provides a smooth plot that represents the trend.
+
+The web app does not use grid search to get the best parameters because of the time cost. It gives the users results from four different models and the users can evaluate based on the outcome and plot of the stock price to make trading actions. It should be stated that this stock predictor is more of a showing application of machine learning model in finance rather than real stock trading advice. To make the predictor more practical and meaningful, it is necessary to use some financial knowledge to feature engineering the data and feed into the model.
 
 ## **Licensing, Authors, Acknowledgements**
 Dataset source: [Yahoo Finance API](https://finance.yahoo.com/)
