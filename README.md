@@ -35,4 +35,5 @@ The main results and analysis can be found at this [post](https://micluan41.medi
 
 ## **Licensing, Authors, Acknowledgements**
 Dataset source: [Yahoo Finance API](https://finance.yahoo.com/)
+
 Udacity MLND Capstone Project Description - Investment and Trading [docs](MLND Capstone Project Description - Investment and Trading)
