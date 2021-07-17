@@ -6,8 +6,8 @@ Captone Project for Udacity Data Science Nanodegree
 2. Project Motivation
 3. Project Definition
 4. File Description
-5. Analysis
-6. Results 
+5. Running Instruction
+6. Analysis and Results
 7. Conclusion
 8. Licensing, Authors, Acknowledgements
 
@@ -35,10 +35,13 @@ Then, I translated all the work in the above notebook to two python scripts 'hel
 
 Finally, 'stock_app.py' is the python script to enable the web app and showing resutls.
 
-## **Analysis**
+## **Running Instruction**
 
 
-## **Results**
+## **Analysis and Results**
+
+### **Data**
+
 
 
 ## **Licensing, Authors, Acknowledgements**
