@@ -38,7 +38,11 @@ Then, I translated all the work in the above notebook to two python scripts 'hel
 Finally, 'stock_app.py' is the python script to enable the web app and showing resutls. Different from the 'User_interface', it uses function of 'regression_model.py'.
 
 ## **Running Instruction**
+First, install all necessary libraries in requirements.txt. I recommend creating a virtual environment and install by command: pip install -r requirements.txt
+If you want to run the notebook, you can also install in the notebook by: import sys, then !{sys.executable} -m pip install -r requirements.txt
 
+To run the web app, open the command prompt in the directory, then use command: streamlit run stock_app.py
+In the web app, choose the company sticker and models (multiple choices) from the left sidebar.
 
 ## **Analysis and Results**
 
