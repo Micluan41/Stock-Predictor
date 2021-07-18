@@ -52,7 +52,7 @@ In the web app, choose the company sticker and models (multiple choices) from th
 **Input description:** I query from Yahoo finance API for the data starting from an original time to the most up-to-date data. The dataframe includes daily open, close, high, low price, volume, whether the company pays dividends and splits stock. For regression model, I decide to simplify the input and use closing price only. The input for regression model is simply the **previous day closing price**. Since recent prices are more relevant to predict the next price, I used one-year data from now which contains 252 data points. For the deep learning model, the goal is to study possible long term dependencies. Therefore, the dataset contains around 2600 data points (from 2011-1-1 to now). The input contains the **previous 60-day closing price** and has a dimension of (1, 60). 
 
 **Visualization:** The closing price history of APPLE INC is plotted
-
+![alt text](https://github.com/Micluan41/Stock-Predictor/blob/main/appl_closing.png?raw=true)
 
 ### - **Methodology**
 To predict the price value, it is genuine to think about regression and neural network to give predictions. For the first part, I've chosen to use linear regression, decision tree regression and SVM for the modelling. Linear model is very straightforward and easy to implement, although it will give you bad fit if the underlying relation is significantly non-linear. SVM, on the other hand, could provide fit for non-linear relationship in spite of slow learning rate and risk of overfitting. Decision tree is generally more suitable for problems with discrete or categorical features, regression tree could also handle continuous features. However, the tree can be non-robust and 
