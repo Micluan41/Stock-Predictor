@@ -78,12 +78,12 @@ Finally, calculate what percentage the prediction is within the actual price.
 **Model Evaluation and Validation**
 The results of final models are shown in the table below.
 
-| Model name   | train mse | test mse | train r2_score | test r2_score | prediction within actual price | next day prediction |
-| ------------ | --------- | --- -----| -------------- | ------------- | ------------------------------ | ------------------- |
-| Linear       | 7.4256    | 3.2717   | 0.9284         | 0.9408        | 1.37%                          | 145.2818            |
-| DecisionTree | 5.6167    | 9.3628   | 0.9458         | 0.8307        | 2.32%                          | 141.6075            |
-| SVM          | 9.1637    | 3.8813   | 0.9116         | 0.9298        | 1.50%                          | 149.3126            |
-| LSTM         | 1.4049    | 25.5688  | 0.9950         | 0.8338        | 4.15%                          | 141.4464            |
+ Model name   | train mse | test mse | train r2_score | test r2_score | prediction within actual price | next day prediction 
+ ------------ | --------- | --- -----| -------------- | ------------- | ------------------------------ | ------------------- 
+ Linear       | 7.4256    | 3.2717   | 0.9284         | 0.9408        | 1.37%                          | 145.2818            
+ DecisionTree | 5.6167    | 9.3628   | 0.9458         | 0.8307        | 2.32%                          | 141.6075            
+ SVM          | 9.1637    | 3.8813   | 0.9116         | 0.9298        | 1.50%                          | 149.3126            
+ LSTM         | 1.4049    | 25.5688  | 0.9950         | 0.8338        | 4.15%                          | 141.4464            
 
 **Justification**
 
