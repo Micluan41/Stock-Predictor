@@ -60,22 +60,22 @@ In the web app, choose the company sticker and models (multiple choices) from th
 To predict the price value, it is genuine to think about regression and neural network to give predictions. For the first part, I've chosen to use linear regression, decision tree regression and SVM for the modelling. Linear model is very straightforward and easy to implement, although it will give you bad fit if the underlying relation is significantly non-linear. SVM, on the other hand, could provide fit for non-linear relationship in spite of slow learning rate and risk of overfitting. Decision tree is generally more suitable for problems with discrete or categorical features, regression tree could also handle continuous features. However, the tree can be non-robust and 
 prone to overfit. The other approach is neural network. To use larger dataset that tracing back to 10 years ago, we probably keep track of arbitrary long-term dependencies. Recurrent nueral network, more specifically, long short-term memory(LSTM) keeps feeding the hidden state features to the next step and train the model with new input together. It is suitable to make market prediction given the time series stock data. 
 
-**Data Preprocessing**
-For regression models (Linear, DecisionTree, SVM), there isn't preprocessing step. For LSTM, normalize the data to (0,1) using MinMaxScaler from sklearn.preprocessing. Then extract previous 60-day price at each time to form a (n, 60) dimension input.
+**Data Preprocessing:**
+For regression models (Linear, DecisionTree, SVM), there isn't a preprocessing step. For LSTM, normalize the data to (0,1) using MinMaxScaler from sklearn.preprocessing. Then extract previous 60-day price at each time to form a (n, 60) dimension input.
 
-**Implementation**
+**Implementation:**
 For regression models (Linear, DecisionTree, SVM), recent one-year data were splitted with a testsize of 0.2. Build those models using LinearRegression, SVR,  DecisionTreeRegressor in python sklearn library with default parameters. Feed the training dataset to the model and make prediction on the test dataset. Metrics for both training data and test data are printed. The comparison of predicted and actual price on test data is also plotted. Later, run the gridsearch on DecisionTree and SVM to optimize parameter. Finally, predict the next day price using the final model.
 
-For LSTM, the entire history data is used (from 2011-1-1). A customized train_test_split function was defined to split data with a default testsize of 0.1. The split will not shuffle the data so that the training data are all before test data. The function also reshape the input to the correct dimension as mentioned above. Use tensorflow to build the LSTM model with a few predefined parameters and train the model. Watch the loss change during each epochs to make sure the model is trained sufficiently. Print metrics on training and testing data and plot test predicton with actual price. Run grid search to optimize key hyperparameters (lstm layer size, dropout, dense layer size).
+For LSTM, the entire history data is used (from 2011-1-1). A customized train_test_split function was defined to split data with a default testsize of 0.1. The split will not shuffle the data so that the training data are all before test data. The function also reshape the input to the correct dimension as mentioned above. Use tensorflow to build the LSTM model with a few predefined parameters and train the model. The model consists of **two lstm layers**，**two dropout layers** and **two dense layers**. Watch the loss change during each epochs to make sure the model is trained sufficiently. Print metrics on training and testing data and plot test predicton with actual price. Run grid search to optimize key hyperparameters (lstm layer size, dropout, dense layer size).
 
 Finally, subplot the prediction of all four models with actual price of the test data and compare them. Make the next day prediction for LSTM model.
 
-**Evaluation and Refinement**
+**Evaluation and Refinement:**
 For the case study, I used APPLE stock. The metrics (MSE, r2_score) in Project Definition are calculated after the models are trained with default parameters. For DecisionTree, SVM and LSTM, run GridSearch on some parameters to see if the metrics are improved. The final last day prediction should use the optimized model to generate.
 Finally, calculate what percentage the prediction is within the actual price. 
 
 ## **Results**
-**Model Evaluation and Validation**
+### - **Model Evaluation**
 The results of final models are shown in the table below, including metrics in training and testing dataset and next day prediction.
 
 Model name   | train mse | test mse | train r2_score | test r2_score | prediction within actual price | next day prediction 
@@ -88,23 +88,24 @@ LSTM         | 1.4049    | 25.5688  | 0.9950         | 0.8338        | 4.15%    
 In general, all four models get prediction within 5% of the actual price and the next day prediction are quite close. 
 The linear model has the smallest mse and the best test r2_score using default parameters. 
 DecisionTree model overfits with default parameters. After optimization, the mse for test data decreases from 11.3606 to 9.3628 and r2_score increase from  0.7946 to 0.8307.
-SVM does not have improvements after the grid search. It ranks the second best behind linear model.
+SVM does not have improvements after the grid search. It ranks the second best behind linear model for this specific stock.
 LSTM uses a lot more past data and overfits the training data. Thus it has the largest mse for test data. But the r2_score and the prediction are still acceptable after optimization. **NOTE: The grid search process took over 2 hours to run. The best parameters are set as default to showcase the training and printing metrics in the notebook.**
 
+### - **Model Validation**
 In 'User_Interface' notebook, I run the process (without grid search) on other stocks (AMAZON, FACEBOOK, TWITTER) by changing the stock sticker in the third cell. The results validate the model can provide acceptable prediction (5-10%) on different stocks. 
 
-**Justification**
-The linear model and SVM performs better in most cases than DecisionTree. This is expected as DecisionTree regressor has more parameters that could affect the fit and the risk of overfitting training data is higher. SVM could perform better than linear model when the pattern of the stock is highly non-linear. LSTM, like DecisionTree, tends to overfit the training data. LSTM model also uses 60-day price as features of the input which assumes that previous price has contribution to the next day price. In reality, this might not necessary be related. 
-
+### - **Justification**
+The linear model and SVM performs better in most cases than DecisionTree. This is expected as DecisionTree regressor has more parameters that could affect the fit and the risk of overfitting training data is higher. SVM could perform better than linear model when the pattern of the stock is highly non-linear. LSTM, like DecisionTree, tends to overfit the training data. LSTM model also uses 60-day price as features of the input which assumes that previous price has contribution to the next day price. In reality, this might not necessary be related. By doing grid search could improve the r2_score and reduce mse. For example, changing the lstm layer size and the final dense layer size 
+could improve the LSTM model. Increase max_depth of DecisionTree regressor improve the overfitting issue.
 
 ## **Conclusion**
-**Reflection**
+### - **Reflection**
 The idea of this project is to use machine learning model to learn the historical progression of a company's stock price and predict it for the next day and future. A few regression models are built and trained by feeding previous day price as input. A LSTM deep learning model is also built and trained by feeding previous 60-day price as input. The metrics for both training data and testing data are printed and compared to find the better model. Optimize some models by conducting a grid search could improve the performance. Finally, a web application is built by putting everything in the notebook together. The web app will show the next day prediction of the user selected stock and models as well as plot that compares prediction to actual price in recent days.
 
 The insteresting part of this project is that the prediction actually can be very close to the actual price. Despite some difference on the value, the prediction has a good representation of the trend of the price change. Therefore, we can also convert it to a classification problem by predicting whether the price will increase or decrease for the next day. One of the difficulties is to get useful features. This might require some financial knowledge to get more practical features rather than only the stock price.
 
-**Future Improvement**
-The data preprocessing could be explored more to get better input features. For example, using the 60-day moving average instead of 60-day stock prices for the LSTM or including categorical variable such as whether the company pays dividends or split stock. This model could do better for those stock that has a sudden jump or plummet at a certain time due to these finiancial decisions. Another thing is discussed in Reflection that we can convert output to categorical variable (increase/decrease) and use accuracy as the metrics. This might be better since people make trading depending on the price changing direction. 
+### - **Future Improvement**
+The data preprocessing could be explored more to get better input features. For example, using the 60-day moving average instead of 60-day stock prices for the LSTM or including categorical variable such as whether the company pays dividends or split stock. This model could do better for those stocks that have a sudden jump or plummet at a certain time due to these finiancial decisions. Another thing is discussed in Reflection that we can convert output to categorical variable (increase/decrease) and use accuracy as the metrics. This might be better since people make trading decisions depending on the price changing direction. 
 
 ## **Licensing, Authors, Acknowledgements**
 Dataset source: [Yahoo Finance API](https://finance.yahoo.com/)
