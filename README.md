@@ -76,7 +76,7 @@ Finally, calculate what percentage the prediction is within the actual price.
 
 ## **Results**
 **Model Evaluation and Validation**
-The results of final models are shown in the table below.
+The results of final models are shown in the table below, including metrics in training and testing dataset and next day prediction.
 
 Model name   | train mse | test mse | train r2_score | test r2_score | prediction within actual price | next day prediction 
 ------------ | --------- | ---------| -------------- | ------------- | ------------------------------ | ------------------- 
@@ -85,17 +85,26 @@ DecisionTree | 5.6167    | 9.3628   | 0.9458         | 0.8307        | 2.32%    
 SVM          | 9.1637    | 3.8813   | 0.9116         | 0.9298        | 1.50%                          | 149.3126            
 LSTM         | 1.4049    | 25.5688  | 0.9950         | 0.8338        | 4.15%                          | 141.4464            
 
+In general, all four models get prediction within 5% of the actual price and the next day prediction are quite close. 
+The linear model has the smallest mse and the best test r2_score using default parameters. 
+DecisionTree model overfits with default parameters. After optimization, the mse for test data decreases from 11.3606 to 9.3628 and r2_score increase from  0.7946 to 0.8307.
+SVM does not have improvements after the grid search. It ranks the second best behind linear model.
+LSTM uses a lot more past data and overfits the training data. Thus it has the largest mse for test data. But the r2_score and the prediction are still acceptable after optimization. **NOTE: The grid search process took over 2 hours to run. The best parameters are set as default to showcase the training and printing metrics in the notebook.**
 
+In 'User_Interface' notebook, I run the process (without grid search) on other stocks (AMAZON, FACEBOOK, TWITTER) by changing the stock sticker in the third cell. The results validate the model can provide acceptable prediction (5-10%) on different stocks. 
 
 **Justification**
+The linear model and SVM performs better in most cases than DecisionTree. This is expected as DecisionTree regressor has more parameters that could affect the fit and the risk of overfitting training data is higher. SVM could perform better than linear model when the pattern of the stock is highly non-linear. LSTM, like DecisionTree, tends to overfit the training data. LSTM model also uses 60-day price as features of the input which assumes that previous price has contribution to the next day price. In reality, this might not necessary be related. 
 
-**Future Improvement**
-The model can be improved to generate more useful trading advices. Although it's hard to predict price right, it's easier to predict if the stock price will increase or decrease and convert it into a classification problem. In that way, we can get wrong prices but correct direction which is used to get trading direction. Another way to improve the model is by feature engineering the input. For instance, we can use a moving average of the previous 7 days price instead of only the previous day as input. We could also consider some variables like returns and categorical variables like if the company pays dividend etc. For the LSTM model, we could try few features e.g. previous 30-day stock price.
 
 ## **Conclusion**
-The idea of this project is to use machine learning model to learn the historical progression of a company's stock price and predict it for the next day and future. A few models are built and compared together. Since different stocks have their own pattern, there is no one best model to fit all. In general, linear regression and SVM have similar performance and smaller MSE. Decisiontree is not stable and easily overfits. The LSTM model uses more historical data and also has overfitting problem, but it provides a smooth plot that represents the trend.
+**Reflection**
+The idea of this project is to use machine learning model to learn the historical progression of a company's stock price and predict it for the next day and future. A few regression models are built and trained by feeding previous day price as input. A LSTM deep learning model is also built and trained by feeding previous 60-day price as input. The metrics for both training data and testing data are printed and compared to find the better model. Optimize some models by conducting a grid search could improve the performance. Finally, a web application is built by putting everything in the notebook together. The web app will show the next day prediction of the user selected stock and models as well as plot that compares prediction to actual price in recent days.
 
-The web app does not use grid search to get the best parameters because of the time cost. It gives the users results from four different models and the users can evaluate based on the printed metrics and plots of the stock price to make trading actions. It should be emphasized that this stock predictor is more of a showing application of machine learning model in finance rather than real stock trading advice. To make the predictor more practical and meaningful, it is necessary to use some financial knowledge to feature engineering the data and feed into the model.
+The insteresting part of this project is that the prediction actually can be very close to the actual price. Despite some difference on the value, the prediction has a good representation of the trend of the price change. Therefore, we can also convert it to a classification problem by predicting whether the price will increase or decrease for the next day. One of the difficulties is to get useful features. This might require some financial knowledge to get more practical features rather than only the stock price.
+
+**Future Improvement**
+The data preprocessing could be explored more to get better input features. For example, using the 60-day moving average instead of 60-day stock prices for the LSTM or including categorical variable such as whether the company pays dividends or split stock. This model could do better for those stock that has a sudden jump or plummet at a certain time due to these finiancial decisions. Another thing is discussed in Reflection that we can convert output to categorical variable (increase/decrease) and use accuracy as the metrics. This might be better since people make trading depending on the price changing direction. 
 
 ## **Licensing, Authors, Acknowledgements**
 Dataset source: [Yahoo Finance API](https://finance.yahoo.com/)
