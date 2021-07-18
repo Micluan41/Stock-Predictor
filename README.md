@@ -7,9 +7,10 @@ Captone Project for Udacity Data Science Nanodegree
 3. Project Definition
 4. File Description
 5. Running Instruction
-6. Analysis and Results
-7. Conclusion
-8. Licensing, Authors, Acknowledgements
+6. Analysis 
+7. Results
+8. Conclusion
+9. Licensing, Authors, Acknowledgements
 
 ## **Installation**
 To run the scripts/notebooks of this project, you'll need the following python libraries installed.
@@ -27,6 +28,7 @@ Develop a stock predictor that predict any company's future stock given its hist
 Some solutions including regression (linear, polynomial) models are provided as well as deep learning model (LSTM). Compare all these models and find the best fit.
 
 **Metrics:** To evaluate the performance of the model, I decide to compare mean squared error (MSE) and r2_score. MSE measures the average squared difference between the estimated values and the actual value, which is a good measure of the quality of an estimator. r2_score is the amount of the variation in the output dependent attribute which is predictable from the input independent variables. Typically, a smaller MSE and a larger r2_score indicates a better performance.
+Another metric to measure the model is to check what percentage the prediction is within the actual price on average. The formula I use is 'rmse/average price' where rmse is the root MSE of the test data and average price is the average actual price of the test data. If it is within 5-10%, the model is considered acceptable.  
 
 ## **File Description**
 To run the notebook or the web application, you have to first install the necessary python libraries in requirements.txt
@@ -46,7 +48,7 @@ If you want to run the notebook, you can also install in the notebook by: import
 To run the web app, open the command prompt in the directory, then use command: streamlit run stock_app.py
 In the web app, choose the company sticker and models (multiple choices) from the left sidebar.
 
-## **Analysis and Results**
+## **Analysis**
 
 ### - **Data**
 **Input description:** I query from Yahoo finance API for the data starting from an original time to the most up-to-date data. The dataframe includes daily open, close, high, low price, volume, whether the company pays dividends and splits stock. For regression model, I decide to simplify the input and use closing price only. The input for regression model is simply the **previous day closing price**. Since recent prices are more relevant to predict the next price, I used one-year data from now which contains 252 data points. For the deep learning model, the goal is to study possible long term dependencies. Therefore, the dataset contains around 2600 data points (from 2011-1-1 to now). The input contains the **previous 60-day closing price** and has a dimension of (1, 60). In addition, there is a preprocessing step which normalizes the closing price to (0,1) before training the deep learning model. 
@@ -70,11 +72,21 @@ Finally, subplot the prediction of all four models with actual price of the test
 
 **Evaluation and Refinement**
 For the case study, I used APPLE stock. The metrics (MSE, r2_score) in Project Definition are calculated after the models are trained with default parameters. For DecisionTree, SVM and LSTM, run GridSearch on some parameters to see if the metrics are improved. The final last day prediction should use the optimized model to generate.
+Finally, calculate what percentage the prediction is within the actual price. 
 
-### -**Results**
-For the case study, I run experiments on APPLE stock. The stock has a big jump in 2020 and recently it bounces back and forth while remain an increasing trend. The linear regression and SVM has similar MSE and R2_score, while DecisionTree overfit the training data and got larger MSE and smaller R2_score for the test data. After a GridSearch, the MSE reduces to slightly larger than the other two models. The LSTM model used more data and ended up overfiting the training data and has large MSE compare to the other regression models. Overall, LSTM prediction is smoother and might be used to study the long time trend of the stock change.
+## **Results**
+**Model Evaluation and Validation**
+The results of final models are shown in the table below.
+| Model name | train mse | test mse | train r2_score | test r2_score | prediction within actual price | next day prediction |
+| --- | --- | --- | --- | --- | --- |
+| Linear Regression | 7.4256 | 3.2717 | 0.9284 | 0.9408 | 1.37% | 145.2818 |
+| DecisionTree |  5.6167 | 9.3628 | 0.9458 | 0.8307 | 2.32% | 141.6075 |
+| SVM Regression | 9.1637 | 3.8813 | 0.9116 | 0.9298 | 1.50% | 149.3126 |
+| LSTM | 1.4049 | 25.5688 | 0.9950 | 0.8338 | 4.15% | 141.4464 |
 
-### -**Future Improvement**
+**Justification**
+
+**Future Improvement**
 The model can be improved to generate more useful trading advices. Although it's hard to predict price right, it's easier to predict if the stock price will increase or decrease and convert it into a classification problem. In that way, we can get wrong prices but correct direction which is used to get trading direction. Another way to improve the model is by feature engineering the input. For instance, we can use a moving average of the previous 7 days price instead of only the previous day as input. We could also consider some variables like returns and categorical variables like if the company pays dividend etc. For the LSTM model, we could try few features e.g. previous 30-day stock price.
 
 ## **Conclusion**
