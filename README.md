@@ -49,9 +49,9 @@ In the web app, choose the company sticker and models (multiple choices) from th
 ## **Analysis and Results**
 
 ### - **Data**
-**Input description:** I query from Yahoo finance API for the data starting from an original time to the most up-to-date data. The dataframe includes daily open, close, high, low price, volume, whether the company pays dividends and splits stock. For regression model, I decide to simplify the input and use closing price only. The input for regression model is simply the **previous day closing price**. Since recent prices are more relevant to predict the next price, I used one-year data from now which contains 252 data points. For the deep learning model, the goal is to study possible long term dependencies. Therefore, the dataset contains around 2600 data points (from 2011-1-1 to now). The input contains the **previous 60-day closing price** and has a dimension of (1, 60). 
+**Input description:** I query from Yahoo finance API for the data starting from an original time to the most up-to-date data. The dataframe includes daily open, close, high, low price, volume, whether the company pays dividends and splits stock. For regression model, I decide to simplify the input and use closing price only. The input for regression model is simply the **previous day closing price**. Since recent prices are more relevant to predict the next price, I used one-year data from now which contains 252 data points. For the deep learning model, the goal is to study possible long term dependencies. Therefore, the dataset contains around 2600 data points (from 2011-1-1 to now). The input contains the **previous 60-day closing price** and has a dimension of (1, 60). In addition, there is a preprocessing step which normalizes the closing price to (0,1) before training the deep learning model. 
 
-**Visualization:** The closing price history of APPLE INC is plotted
+**Visualization:** The closing price history of APPLE INC is plotted. It is clear that the recent data has a quite different trend compare to earlier days. So for regression model, it's reasonable to use one year from now data. For the deep learning model, use the whole history to study long tern dependencies. 
 ![alt text](https://github.com/Micluan41/Stock-Predictor/blob/main/appl_closing.png?raw=true)
 
 ### - **Methodology**
