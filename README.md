@@ -74,6 +74,12 @@ Finally, subplot the prediction of all four models with actual price of the test
 For the case study, I used APPLE stock. The metrics (MSE, r2_score) in Project Definition are calculated after the models are trained with default parameters. For DecisionTree, SVM and LSTM, run GridSearch on some parameters to see if the metrics are improved. The final last day prediction should use the optimized model to generate.
 Finally, calculate what percentage the prediction is within the actual price. 
 
+DecisionTree: search 'max depth' (None, 2, 3, 5, 8), 'criterion': ('mse', 'mae'), 'splitter': ('best', 'random'). The best parameters are (max_depth=8, 'mse', 'random'), reducing MSE from 11.36 to 9.36 and improving r2_score by 0.04, compared with default (None, 'mse', 'best').
+
+SVM: search 'kernel': ('poly', 'rbf', 'sigmoid') and 'C' (inverse proportional to regularization strength): (0.0001, 0.001, 0.01, 0.1, 1.0). The best parameters are ('poly', 1.0) which is the default.
+
+LSTM: search 'lstm_size': (20, 32, 64), 'dropout' (probability): (0.2, 0.3, 0.5), 'dense_size': (50, 20, 10). The best parameters are (64, 0.2, 10). There is no default for these parameters. Therefore, I set them as the default to run the web app. Other parameters like training epochs and batch size could also be searched. But they are not critical in building the model. 
+
 ## **Results**
 ### - **Model Evaluation**
 The results of final models are shown in the table below, including metrics in training and testing dataset and next day prediction.
