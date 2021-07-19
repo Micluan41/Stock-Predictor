@@ -81,7 +81,7 @@ SVM: search 'kernel': ('poly', 'rbf', 'sigmoid') and 'C' (inverse proportional t
 LSTM: search 'lstm_size': (20, 32, 64), 'dropout' (probability): (0.2, 0.3, 0.5), 'dense_size': (50, 20, 10). The best parameters are (64, 0.2, 10). There is no default for these parameters. Therefore, I set them as the default to run the web app. Other parameters like training epochs and batch size could also be searched. But they are not critical in building the model. 
 
 ## **Results**
-### - **Model Evaluation**
+### - **Model Evaluation and Validation**
 The results of final models are shown in the table below, including metrics in training and testing dataset and next day prediction.
 
 Model name   | train mse | test mse | train r2_score | test r2_score | prediction within actual price | next day prediction 
@@ -97,7 +97,10 @@ DecisionTree model overfits with default parameters. After optimization, the mse
 SVM does not have improvements after the grid search. It ranks the second best behind linear model for this specific stock.
 LSTM uses a lot more past data and overfits the training data. Thus it has the largest mse for test data. But the r2_score and the prediction are still acceptable after optimization. **NOTE: The grid search process took over 2 hours to run. The best parameters are set as default to showcase the training and printing metrics in the notebook.**
 
-### - **Model Validation**
+The regression models are relatively robust because it uses the stock price of the previous day as input and the stock price doesn't change drastically or change direciton from day to day. It would work well for most stocks except those that have large variation i.e. changing direction frequently. For DecisionTree, the max_depth is an important factor. The final model has a max_depth of 8, this prevents overfitting the training data and allow some flexibility to capture the pattern. For SVM, polynomial kernel is used and the parameter C is 1.0. C is giving appropriate regularization and avoid overfitting the training data compared with a large C values.
+
+For LSTM model, I performed a time series cross validation model by sliding a 200 data window from a 1500 data origin. Each time, the model is trained by absorbing the 200 data and predict the next 200 data. The MSE increases as the stock price is higher, but the 'rmse/average price' metrics is quite stable in the 4 folds (3.05%, 3.11%, 3.01%, 3.38%). This is also close to the model trained by the full training data (3.64%). Therefore, it is fair to say the model is robust against small perturbations in training data.
+
 In 'User_Interface' notebook, I run the process (without grid search) on other stocks (AMAZON, FACEBOOK, TWITTER) by changing the stock sticker in the third cell. The results validate the model can provide acceptable prediction (5-10%) on different stocks. 
 
 ### - **Justification**
